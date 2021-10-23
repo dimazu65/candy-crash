@@ -119,8 +119,8 @@ const App = () => {
   const dragEnd = (e) =>{
     const squareBeingDraggedId =parseInt(squareBeingDragged.getAttribute('data-id'))
     const squareBeingReplacedId =parseInt(squareBeingReplaced.getAttribute('data-id'))
-    currentColorArrangement[squareBeingReplacedId] =squareBeingDragged.getAttribute('src')
-    currentColorArrangement[squareBeingDraggedId] =squareBeingReplaced.getAttribute('src')
+    //currentColorArrangement[squareBeingReplacedId] =squareBeingDragged.getAttribute('src')
+    //currentColorArrangement[squareBeingDraggedId] =squareBeingReplaced.getAttribute('src')
     
      const validMoves = [
       squareBeingDraggedId -1,
@@ -128,7 +128,7 @@ const App = () => {
       squareBeingDraggedId +1,
       squareBeingDraggedId +width
     ]
-
+    
     const validMove = validMoves.includes(squareBeingReplacedId)
     
     const isColumnOfFour =checkForColumnOfFour()
@@ -139,13 +139,19 @@ const App = () => {
     let d = squareBeingReplacedId && validMove
     let k= isRowOfThree||isRowOfFour||isColumnOfThree||isColumnOfFour
     
-    if (d && k) {
-        setSquareBeingReplaced(null)
-        setSquareBeingDragged(null)
+    if (d) {
+        currentColorArrangement[squareBeingReplacedId] =squareBeingDragged.getAttribute('src')
+        currentColorArrangement[squareBeingDraggedId] =squareBeingReplaced.getAttribute('src')
+        if (k) {
+          setSquareBeingReplaced(null)
+          setSquareBeingDragged(null)
+        }
+    
+      
     } else {
-      currentColorArrangement[squareBeingReplacedId] = squareBeingReplaced.getAttribute('src')
-      currentColorArrangement[squareBeingDraggedId] = squareBeingDragged.getAttribute('src')
-      setCurrentColorArrangement([...currentColorArrangement])
+      //currentColorArrangement[squareBeingReplacedId] = squareBeingReplaced.getAttribute('src')
+      //currentColorArrangement[squareBeingDraggedId] = squareBeingDragged.getAttribute('src')
+      //setCurrentColorArrangement([...currentColorArrangement])
     } 
     
   }
