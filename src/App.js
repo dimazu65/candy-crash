@@ -9,6 +9,7 @@ import purpleCandy from './images/purplecandy.png'
 import redCandy from './images/redcandy.png'
 import yellowCandy from './images/yellowcandy.png'
 import blank from './images/blank.png'
+import { Fragment } from 'react/cjs/react.production.min';
 
 
 const width =8
@@ -147,7 +148,7 @@ const App = () => {
       
       currentColorArrangement[squareBeingReplacedId] = squareBeingReplaced.getAttribute('src')
       currentColorArrangement[squareBeingDraggedId] = squareBeingDragged.getAttribute('src')
-      //setCurrentColorArrangement([...currentColorArrangement])
+      setCurrentColorArrangement([...currentColorArrangement])
     } 
     
   }
@@ -182,26 +183,41 @@ const App = () => {
   
   return (
     <div className="app">
-      <div className="game">
-           {currentColorArrangement.map((candyColor, index) => (
-             <img
-               key={index}
-               src={candyColor}
-               alt={candyColor}
-               data-id = {index}
-               draggable = {true}
-               onDragStart ={dragStart}
-               onDragOver ={(e)=> e.preventDefault()} 
-               onDragEnter ={(e)=> e.preventDefault()} 
-               onDragLeave ={(e)=> e.preventDefault()} 
-               onDrop={dragDrop}
-               onDragEnd={dragEnd}
-             />
-           ))}
-      </div>
+      { 
+      scoreDisplay>=100 ? (
+        <h1 className="complete">You Win!!!</h1> 
+       ): 
+      (
+      <Fragment>
+         <div className="game">
+         {currentColorArrangement.map((candyColor, index) => (
+           <img
+             key={index}
+             src={candyColor}
+             alt={candyColor}
+             data-id = {index}
+             draggable = {true}
+             onDragStart ={dragStart}
+             onDragOver ={(e)=> e.preventDefault()} 
+             onDragEnter ={(e)=> e.preventDefault()} 
+             onDragLeave ={(e)=> e.preventDefault()} 
+             onDrop={dragDrop}
+             onDragEnd={dragEnd}
+           />
+         ))}
+    </div>
+      <div className="score-grid">
+         <div className="score-gridtip">
+              <strong>
+              You will win once your score reaches to 100.</strong>
+        </div> 
         <div className="score-board">
-          <h3>{scoreDisplay}</h3>
+        <h3>{scoreDisplay}</h3>
         </div>
+      </div>
+      </Fragment>
+      )
+     }
     </div>
   );
  }
