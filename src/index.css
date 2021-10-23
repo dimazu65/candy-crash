@@ -59,4 +59,8 @@
 .complete {
   color: #8BC34A;
 }
+.bcomplete {
+  color: #8BC34A;
+  cursor: pointer;
+}
 

@@ -178,11 +178,20 @@ const App = () => {
 
   },[checkForColumnOfFour, checkForColumnOfThree, checkForRowOfFour, checkForRowOfThree, moveIntoSquadBelow, currentColorArrangement])
   
+  const nullScore = () => {
+    setScoreDisplay( (score) => 0)
+    createBoard()
+  }
   return (
     <div className="app">
       { 
       scoreDisplay>=100 ? (
-        <h1 className="complete">You Win!!!</h1> 
+       <Fragment>
+         <div>
+          <h1 className="complete">You Win!!!</h1> 
+          <h1 className="bcomplete" onClick={nullScore}>Play again</h1>
+         </div> 
+        </Fragment>  
        ): 
       (
       <Fragment>
