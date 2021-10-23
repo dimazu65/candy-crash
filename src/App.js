@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react'
 import './index.css';
@@ -136,16 +135,14 @@ const App = () => {
     const isRowOfFour= checkForRowOfFour()
     const isColumnOfThree=checkForColumnOfThree()
     const isRowOfThree=checkForRowOfThree()
+
     let d = squareBeingReplacedId && validMove
     let k= isRowOfThree||isRowOfFour||isColumnOfThree||isColumnOfFour
     
     if (d && k) {
-    
-       
         setSquareBeingReplaced(null)
         setSquareBeingDragged(null)
     } else {
-      
       currentColorArrangement[squareBeingReplacedId] = squareBeingReplaced.getAttribute('src')
       currentColorArrangement[squareBeingDraggedId] = squareBeingDragged.getAttribute('src')
       setCurrentColorArrangement([...currentColorArrangement])
