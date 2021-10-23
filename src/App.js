@@ -28,7 +28,7 @@ const App = () => {
   const [squareBeingReplaced, setSquareBeingReplaced]=useState(null)
   const [scoreDisplay, setScoreDisplay] = useState (0)
 
-  const checkForColumnOfFour =() => {
+  const checkForColumnOfFour =useCallback (() => {
     for (let i = 0; i <= 39; i++) {
       const columnOfFour = [i, i+width, i + width*2, i+width*3]
       const decidedColor = currentColorArrangement[i]
@@ -41,13 +41,11 @@ const App = () => {
         return true
       }
     }
-  }
+  },[currentColorArrangement])
 
-  const handleClickOpen = useCallback(() => {
-    checkForColumnOfFour()
-  }, [])
+ 
 
-  const checkForColumnOfThree =() => {
+  const checkForColumnOfThree =useCallback (() => {
     for (let i = 0; i <= 47; i++) {
       const columnOfThree = [i, i+width, i + width*2]
       const decidedColor = currentColorArrangement[i]
@@ -59,9 +57,9 @@ const App = () => {
         return true
       }
     }
-  }
+  },[currentColorArrangement])
 
-  const checkForRowOfFour =() => {
+  const checkForRowOfFour =useCallback (() => {
     for (let i = 0; i < 64; i++) {
       const rowOfFour = [i, i+1, i + 2, i + 3]
       const decidedColor = currentColorArrangement[i]
@@ -75,9 +73,9 @@ const App = () => {
         return true
       }
     }
-  }
+  },[currentColorArrangement])
 
-  const checkForRowOfThree =() => {
+  const checkForRowOfThree =useCallback (() => {
     for (let i = 0; i < 64; i++) {
       const rowOfThree = [i, i+1, i + 2]
       const decidedColor = currentColorArrangement[i]
@@ -91,13 +89,13 @@ const App = () => {
         return true
       }
     }
-  }
+  },[currentColorArrangement])
 
-  const moveIntoSquadBelow = () => {
+  const moveIntoSquadBelow = useCallback (() => {
     for (let i = 0; i <= 55; i++) {
       const firstRow = [0, 1, 2, 3, 4, 5, 6, 7]
       const isFirstRow = firstRow.includes(i)
-      if (isFirstRow && currentColorArrangement[i] == blank){
+      if (isFirstRow && currentColorArrangement[i] === blank){
         let randomNumber = Math.floor(Math.random()*candyColors.length)
         currentColorArrangement[i]=candyColors[randomNumber]
       }
@@ -108,7 +106,7 @@ const App = () => {
       
     } 
 
-  }
+  },[currentColorArrangement])
 
   const dragStart = (e) =>{
       setSquareBeingDragged(e.target)
@@ -153,6 +151,7 @@ const App = () => {
     } 
     
   }
+
   const createBoard = () => {
     const randomColorArrangement =[]
     for (let i = 0; i < width*width; i++) {
